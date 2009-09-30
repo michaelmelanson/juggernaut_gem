@@ -299,6 +299,10 @@ module Juggernaut
       # Different broadcast types
     
       def broadcast_to_channels(msg, channels = [])
+        unless Juggernaut::options[:allow_broadcasts] or not channels.empty?
+          return
+        end
+        
         Juggernaut::Client.find_all.each {|client| client.send_message(msg, channels) }
       end
       

@@ -19,7 +19,8 @@ module Juggernaut
         :debug => false,
         :cleanup_timer => 2,
         :timeout => 10,
-        :store_messages => false
+        :store_messages => false,
+        :allow_broadcasts => true
       }
       
       self.options.merge!({

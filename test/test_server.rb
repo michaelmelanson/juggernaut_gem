@@ -305,6 +305,16 @@ class TestServer < Test::Unit::TestCase
         assert_body body, subscriber
       end
       
+      should "be denied if :allow_broadcasts: is set to false" do
+        Juggernaut.options[:allow_broadcasts] = false
+        
+        subscriber = nil
+        with_server do
+          subscriber = self.new_client(:client_id => "broadcast_all") { |c| c.subscribe %w(master) }
+          self.new_client { |c| c.broadcast_to_channels %w(), body }
+        end
+        assert_no_response subscriber        
+      end
     end
     
     context "broadcast to a client" do

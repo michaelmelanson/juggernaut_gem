@@ -97,6 +97,13 @@ module Juggernaut
      # This is useful since a client can then receive broadcasted message that it has missed (perhaps it was disconnected).
      #
      # :store_messages: false
+     
+     
+     # allow_broadcasts defaults to true. If this option is false, then
+     # broadcasts will be rejected.
+     #
+     # :allow_broadcasts: true
+
 
      # === Server ===
 
