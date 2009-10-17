@@ -10,6 +10,7 @@ module Juggernaut
     @@clients = [ ]
 
     attr_reader   :id
+    attr_reader   :client_key
     attr_accessor :session_id
     attr_reader   :connections
 
@@ -92,6 +93,7 @@ module Juggernaut
     def initialize(subscriber, request)
       @connections = []
       @id         = request[:client_id]
+      @client_key = request[:client_key]
       @session_id = request[:session_id]
       @messages   = []
       @logout_timeout = 0
@@ -212,6 +214,7 @@ module Juggernaut
       uri.path = '/' if uri.path == ''
       params = []
       params << "client_id=#{id}" if id
+      params << "client_key=#{client_key}" if client_key
       params << "session_id=#{session_id}" if session_id
       channels.each {|chan| params << "channels[]=#{chan}" }
       headers = {"User-Agent" => "Ruby/#{RUBY_VERSION}"}
